@@ -1,4 +1,4 @@
-name: maven-build
+    name: maven-build
 on:
   push:
     branches: [ "main" ]
