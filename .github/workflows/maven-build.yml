@@ -1,9 +1,9 @@
 name: maven-build
-  on:
-    push:
-      branches: [ "main" ]
-    pull-request:
-      branches: [ "main" ]
+on:
+  push:
+    branches: [ "main" ]
+  pull-request:
+    branches: [ "main" ]
 
 jobs:
   checkstyle:
@@ -20,5 +20,5 @@ jobs:
           key: maven-${{ hashFiles('**/pom.xml')}}
           restore-keys: |
             maven-
-            - run: mvn clean install
+            - run: mvn clean i    nstall
 
