@@ -7,18 +7,18 @@ on:
 
 jobs:
   checkstyle:
-    runs-on: ubuntu 20.4
+    runs-on: ubuntu 20.04
     steps:
       - uses: actions/checkout@2
       - uses: actions/setup-java@v3
         with:
-          destribution: 'temurin'
+          distribution: 'temurin'
           java-version: 17
-      -uses: actions/cache@v3
+      - uses: actions/cache@v3
         with:
           path: ~/.m2/repository
           key: maven-${{ hashFiles('**/pom.xml')}}
           restore-keys: |
             maven-
-            - run: mvn clean i    nstall
+      - run: mvn clean install
 
