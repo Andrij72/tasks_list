@@ -5,19 +5,17 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
 jobs:
   checkstyle:
     runs-on: ubuntu-20.04
-
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        users: actions/checkout@v2
       - name: Set up Java
         uses: actions/setup-java@v2
         with:
           distribution: "temurin"
-          java-version: "17"
+          java-version: 17
       - name: Cache Maven dependencies
         uses: actions/cache@v2
         with:
