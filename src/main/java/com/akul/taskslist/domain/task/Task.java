@@ -1,7 +1,6 @@
 package com.akul.taskslist.domain.task;
 
 
-
 import jakarta.persistence.*;
 import lombok.Data;
 

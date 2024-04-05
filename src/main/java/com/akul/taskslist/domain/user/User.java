@@ -34,5 +34,4 @@ public class User implements Serializable {
     @JoinTable(inverseJoinColumns = @JoinColumn(name = "task_id"))
     private List<Task> tasks;
 
-
 }

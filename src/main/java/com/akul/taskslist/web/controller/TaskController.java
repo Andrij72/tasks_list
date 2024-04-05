@@ -15,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @RequestMapping("/api/v1/tasks")
 @RequiredArgsConstructor
@@ -31,7 +32,7 @@ public class TaskController {
     @GetMapping("/{id}")
     @Operation(summary = "Get taskDto")
     @PreAuthorize("@customSecurityExpression.canAccessTask(#id)")
-    public TaskDto getById(@PathVariable Long id) {
+    public TaskDto getById(@PathVariable final Long id) {
         Task task = taskService.getById(id);
         return taskMapper.toDto(task);
     }
@@ -39,7 +40,8 @@ public class TaskController {
     @PutMapping
     @Operation(summary = "Update task")
     @PreAuthorize("@customSecurityExpression.canAccessTask(#taskDto.id)")
-    public TaskDto update(@Validated(OnUpdate.class) @RequestBody TaskDto taskDto) {
+    public TaskDto update(@Validated(OnUpdate.class)
+                          @RequestBody final TaskDto taskDto) {
         Task task = taskMapper.toEntity(taskDto);
         Task updTask = taskService.update(task);
         return taskMapper.toDto(updTask);
@@ -48,19 +50,18 @@ public class TaskController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete task by user id.")
     @PreAuthorize("@customSecurityExpression.canAccessTask(#id)")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable final Long id) {
         taskService.delete(id);
     }
 
     @PostMapping("/{id}/image")
     @Operation(summary = "Upload image to task.")
     @PreAuthorize("@customSecurityExpression.canAccessTask(#id)")
-    public void uploadImage(@PathVariable Long id,
+    public void uploadImage(@PathVariable final Long id,
                             @Validated
-                            @ModelAttribute TaskImageDto imageDto) {
+                            @ModelAttribute final TaskImageDto imageDto) {
         TaskImage image = taskImageMapper.toEntity(imageDto);
         taskService.uploadImage(id, image);
     }
 
 }
-

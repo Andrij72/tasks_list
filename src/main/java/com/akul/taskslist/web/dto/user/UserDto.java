@@ -41,7 +41,8 @@ public class UserDto {
     @Schema(description = "User password confirmation",
             example = "$2a$10$GHTOeyLt.avNCzWQCZbbPeC587aAHF9mglDgVd5WC0BhrApG9bcf2")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @NotNull(message = "Password conformation must be not null.", groups = {OnUpdate.class})
+    @NotNull(message = "Password conformation must be not null.",
+            groups = {OnUpdate.class})
     private String passwordConfirmation;
 
 }

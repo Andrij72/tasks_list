@@ -36,7 +36,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public UserDto register(final @Validated(OnCreate.class)
-                                  @RequestBody UserDto userDto) {
+                            @RequestBody UserDto userDto) {
         User user = userMapper.toEntity(userDto);
         User createUser = userService.create(user);
         return userMapper.toDto(createUser);

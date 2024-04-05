@@ -15,18 +15,24 @@ public class CustomSecurityExpression {
 
     private final UserService userService;
 
-    public boolean canAccessUser(Long id) {
+    public boolean canAccessUser(final Long id) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        JwtEntity jwtEntity = (JwtEntity) authentication.getPrincipal();
+        Authentication authentication = SecurityContextHolder
+                .getContext()
+                .getAuthentication();
+        JwtEntity jwtEntity = (JwtEntity) authentication
+                .getPrincipal();
         Long userId = jwtEntity.getId();
 
-        return userId.equals(id) || hasAnyRole(authentication, Role.ROLE_ADMIN);
+        return userId.equals(id) || hasAnyRole(authentication,
+                Role.ROLE_ADMIN);
     }
 
-    private boolean hasAnyRole(Authentication authentication, Role... roles) {
+    private boolean hasAnyRole(final Authentication authentication,
+                               final Role... roles) {
         for (Role role : roles) {
-            SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.name());
+            SimpleGrantedAuthority authority = new SimpleGrantedAuthority(
+                    role.name());
             if (authentication.getAuthorities().contains(authority)) {
                 return true;
             }
@@ -34,12 +40,16 @@ public class CustomSecurityExpression {
         return false;
     }
 
-    public boolean canAccessTask(Long taskId) {
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        JwtEntity jwtEntity = (JwtEntity) authentication.getPrincipal();
+    public boolean canAccessTask(final Long taskId) {
+        Authentication authentication = SecurityContextHolder
+                .getContext()
+                .getAuthentication();
+        JwtEntity jwtEntity = (JwtEntity) authentication
+                .getPrincipal();
         Long userId = jwtEntity.getId();
-        return userService.isTaskOwner(userId, taskId) || hasAnyRole(authentication, Role.ROLE_ADMIN);
+        return userService.isTaskOwner(
+                userId, taskId) || hasAnyRole(authentication,
+                Role.ROLE_ADMIN);
     }
 
 }
